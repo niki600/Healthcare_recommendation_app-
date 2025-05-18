@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
+import os
 
 # Load and prepare data
 df = pd.read_csv('healthcare_data.csv')
@@ -46,4 +47,5 @@ def predict():
     return render_template('index.html', prediction_text=message)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
